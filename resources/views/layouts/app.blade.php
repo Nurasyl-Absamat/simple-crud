@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -18,6 +17,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @toastr_css
+
 </head>
 <body>
     <div id="app">
@@ -45,7 +46,7 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-                            
+
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -76,8 +77,39 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+
+            <div class="container">
+                <div class="row">
+                    @if (Auth::check())
+                        <div class="col-lg-4">
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-action list-group-item-primary">
+                                    <a href="{{ route('categories.index') }}">Categories</a>
+                                </li>
+
+                                <li class="list-group-item list-group-item-action list-group-item-primary">
+                                    <a href="{{ route('categories.create') }}"> Create new Category</a>
+                                </li>
+
+                                <li class="list-group-item list-group-item-action list-group-item-success">
+                                    <a href="{{ route('posts.index') }}"> Posts</a>
+                                </li>
+
+                                <li class="list-group-item list-group-item-action list-group-item-success">
+                                    <a href="{{ route('posts.create') }}"> Create new Post</a>
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
+                    <div class="col-lg-8">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>
+@jquery
+    @toastr_js
+    @toastr_render
 </html>
