@@ -52,7 +52,7 @@ You can now access the server at http://localhost:8000
 **Command list**
 
     git clone https://github.com/Nurasyl-Absamat/simple-crud.git
-    cd laravel-realworld-example-app
+    cd simple-crud
     composer install
     npm install && npm run dev
     cp .env.example .env
